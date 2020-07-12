@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
-import Select, { ValueType } from "react-select";
+import Select from "react-select";
 import "./HomePage.css";
 
 const options = [
@@ -8,8 +8,18 @@ const options = [
 	{ value: "Litigation", label: "Litigation" },
 ];
 
-const ExperimentPage = ({ initialSelection = options[1] }) => {
+const ExperimentPage = ({ initialSelection = "" }) => {
 	const [selection, setSelection] = useState(initialSelection);
+
+	const DisplayInfo = () => {
+		if (selection === "Conveyancing") {
+			return <h1>Conveyancing!</h1>;
+		} else if (selection === "Litigation") {
+			return <h1>Litigation</h1>;
+		} else {
+			return <div>Select an area to get started</div>;
+		}
+	};
 
 	return (
 		<>
@@ -18,20 +28,13 @@ const ExperimentPage = ({ initialSelection = options[1] }) => {
 				<Select
 					options={options}
 					onChange={(selectedOption) => {
-						if (Array.isArray(selectedOption)) {
-							throw new Error(
-								"Unexpected type passed to ReactSelect onChange handler"
-							);
-						}
-
-						const value = selectedOption && selectedOption.value;
-
 						if (selectedOption) {
 							setSelection(selectedOption.value);
-							// console.log(value);
+							console.log(selectedOption.value);
 						}
 					}}
 				/>
+				<DisplayInfo />
 			</Container>
 		</>
 	);
