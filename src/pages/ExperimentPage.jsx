@@ -1,25 +1,33 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
+import { Accordion, Card, Container } from "react-bootstrap";
+import { BsFillCaretDownFill } from "react-icons/bs";
 import Select from "react-select";
 import "./HomePage.css";
 
+const conveyancingInformation = {
+	title: "conveyancingTitle",
+	description: "conveyancing ",
+	steps: [
+		{
+			stepTitle: "hello1",
+		},
+		{
+			stepTitle: "hello2",
+		},
+	],
+};
+
 const options = [
-	{ value: "Conveyancing", label: "Conveyancing (Property)" },
+	{
+		value: "Conveyancing",
+		label: "Conveyancing (Property)",
+		content: conveyancingInformation,
+	},
 	{ value: "Litigation", label: "Litigation" },
 ];
 
-const ExperimentPage = ({ initialSelection = "" }) => {
+const ExperimentPage = ({ initialSelection = {} }) => {
 	const [selection, setSelection] = useState(initialSelection);
-
-	const DisplayInfo = () => {
-		if (selection === "Conveyancing") {
-			return <h1>Conveyancing!</h1>;
-		} else if (selection === "Litigation") {
-			return <h1>Litigation</h1>;
-		} else {
-			return <div>Select an area to get started</div>;
-		}
-	};
 
 	return (
 		<>
@@ -29,12 +37,39 @@ const ExperimentPage = ({ initialSelection = "" }) => {
 					options={options}
 					onChange={(selectedOption) => {
 						if (selectedOption) {
-							setSelection(selectedOption.value);
+							setSelection(selectedOption);
 							console.log(selectedOption.value);
 						}
 					}}
 				/>
-				<DisplayInfo />
+				<h1>{selection.label}</h1>
+				<Accordion defaultActiveKey="0">
+					<Card>
+						<Accordion.Toggle as={Card.Header} eventKey="0">
+							<span>Process</span>
+							<BsFillCaretDownFill />
+						</Accordion.Toggle>
+						<Accordion.Collapse eventKey="0">
+							<Card.Body>
+								<div>{selection.content && selection.content.description}</div>
+								<div>Herere</div>
+								<div>Herere</div>
+								<div>
+									{selection.content &&
+										`There are ${selection.content.steps.length} steps`}
+								</div>
+							</Card.Body>
+						</Accordion.Collapse>
+					</Card>
+					<Card>
+						<Accordion.Toggle as={Card.Header} eventKey="1">
+							Resources
+						</Accordion.Toggle>
+						<Accordion.Collapse eventKey="1">
+							<Card.Body>Hello! I'm another body</Card.Body>
+						</Accordion.Collapse>
+					</Card>
+				</Accordion>
 			</Container>
 		</>
 	);
