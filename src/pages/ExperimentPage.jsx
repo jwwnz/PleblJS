@@ -9,10 +9,12 @@ const conveyancingInformation = {
 	description: "conveyancing ",
 	steps: [
 		{
-			stepTitle: "hello1",
+			stepTitle: "Title 1",
+			stepContent: "content content",
 		},
 		{
-			stepTitle: "hello2",
+			stepTitle: "Title 2",
+			stepContent: "content content",
 		},
 	],
 };
@@ -52,11 +54,32 @@ const ExperimentPage = ({ initialSelection = {} }) => {
 						<Accordion.Collapse eventKey="0">
 							<Card.Body>
 								<div>{selection.content && selection.content.description}</div>
-								<div>Herere</div>
-								<div>Herere</div>
+								{selection.content &&
+									selection.content.steps.map((step, index) => {
+										return (
+											<div>
+												<h3>{`Step # ${index + 1} ${step.stepTitle}`}</h3>
+												<div>{step.stepContent}</div>
+											</div>
+										);
+									})}
 								<div>
 									{selection.content &&
-										`There are ${selection.content.steps.length} steps`}
+										selection.content.steps.map((step, index) => {
+											return (
+												<span
+													style={{
+														borderLeft: "solid black 1px",
+														borderRight: "solid black 1px",
+														width: "50px",
+														height: "50px",
+														padding: "5px",
+													}}
+												>
+													<a href={`#${index}`}>{index + 1}</a>
+												</span>
+											);
+										})}
 								</div>
 							</Card.Body>
 						</Accordion.Collapse>
