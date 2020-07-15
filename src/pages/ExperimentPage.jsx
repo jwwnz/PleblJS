@@ -61,18 +61,23 @@ const ExperimentPage = ({ initialSelection = {} }) => {
 								<Card.Title>
 									{selection.content && selection.content.description}
 								</Card.Title>
-								<Card.Text>
+								<Card.Text style={{ position: "relative" }}>
 									{selection.content &&
 										selection.content.steps.map((step, index) => {
 											return (
-												<div>
+												<div
+													style={{
+														// position: "absolute",
+														border: "1px solid black",
+													}}
+												>
 													<h3>{`Step # ${index + 1} ${step.stepTitle}`}</h3>
 													<div>{step.stepContent}</div>
 												</div>
 											);
 										})}
 								</Card.Text>
-								<div>
+								<div style={{ position: "relative" }}>
 									{selection.content &&
 										selection.content.steps.map((step, index) => {
 											return (
