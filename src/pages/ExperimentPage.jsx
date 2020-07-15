@@ -28,6 +28,11 @@ const options = [
 	{ value: "Litigation", label: "Litigation" },
 ];
 
+const cardStyle = {
+	position: absolute,
+	border: "1px solid black",
+};
+
 const ExperimentPage = ({ initialSelection = {} }) => {
 	const [selection, setSelection] = useState(initialSelection);
 
@@ -53,16 +58,20 @@ const ExperimentPage = ({ initialSelection = {} }) => {
 						</Accordion.Toggle>
 						<Accordion.Collapse eventKey="0">
 							<Card.Body>
-								<div>{selection.content && selection.content.description}</div>
-								{selection.content &&
-									selection.content.steps.map((step, index) => {
-										return (
-											<div>
-												<h3>{`Step # ${index + 1} ${step.stepTitle}`}</h3>
-												<div>{step.stepContent}</div>
-											</div>
-										);
-									})}
+								<Card.Title>
+									{selection.content && selection.content.description}
+								</Card.Title>
+								<Card.Text>
+									{selection.content &&
+										selection.content.steps.map((step, index) => {
+											return (
+												<div>
+													<h3>{`Step # ${index + 1} ${step.stepTitle}`}</h3>
+													<div>{step.stepContent}</div>
+												</div>
+											);
+										})}
+								</Card.Text>
 								<div>
 									{selection.content &&
 										selection.content.steps.map((step, index) => {

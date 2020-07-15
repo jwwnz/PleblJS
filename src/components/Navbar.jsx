@@ -9,7 +9,7 @@ const plebNavbarBrandStyle = {
 const PlebNavbar = () => (
 	<Navbar bg="light" className="navbarplebi" variant="light">
 		<Navbar.Brand href="/">
-			<span style={plebNavbarBrandStyle}>Plebl</span> <span>NZ</span>
+			<span style={plebNavbarBrandStyle}>Pleb</span>
 		</Navbar.Brand>
 		<Nav className="mr-auto">
 			<Nav.Link href="/experiment">Experiment</Nav.Link>
