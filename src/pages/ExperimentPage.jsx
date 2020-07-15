@@ -29,7 +29,7 @@ const options = [
 ];
 
 const cardStyle = {
-	position: absolute,
+	position: "absolute",
 	border: "1px solid black",
 };
 
