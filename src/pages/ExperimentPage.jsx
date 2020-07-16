@@ -30,7 +30,10 @@ const options = [
 
 const cardStyle = {
 	// position: "absolute",
-	border: "1px solid black",
+	// border: "1px solid black",
+	backgroundColor: "lightgrey",
+	height: "300px",
+	padding: "50px",
 };
 
 const ExperimentPage = ({ initialSelection = {} }) => {
@@ -63,9 +66,9 @@ const ExperimentPage = ({ initialSelection = {} }) => {
 						</Accordion.Toggle>
 						<Accordion.Collapse eventKey="0">
 							<Card.Body>
-								<Card.Title>
+								{/* <Card.Title>
 									{selection.content && selection.content.description}
-								</Card.Title>
+								</Card.Title> */}
 								<Card.Text style={{ position: "relative" }}>
 									<Carousel
 										activeIndex={index}
