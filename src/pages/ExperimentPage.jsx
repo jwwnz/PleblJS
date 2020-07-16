@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Accordion, Card, Container } from "react-bootstrap";
+import { Accordion, Button, Card, Carousel, Container } from "react-bootstrap";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import Select from "react-select";
 import "./HomePage.css";
@@ -29,12 +29,17 @@ const options = [
 ];
 
 const cardStyle = {
-	position: "absolute",
+	// position: "absolute",
 	border: "1px solid black",
 };
 
 const ExperimentPage = ({ initialSelection = {} }) => {
 	const [selection, setSelection] = useState(initialSelection);
+	const [index, setIndex] = useState(0);
+
+	const handleSelect = (selectedIndex, e) => {
+		setIndex(selectedIndex);
+	};
 
 	return (
 		<>
@@ -62,35 +67,47 @@ const ExperimentPage = ({ initialSelection = {} }) => {
 									{selection.content && selection.content.description}
 								</Card.Title>
 								<Card.Text style={{ position: "relative" }}>
-									{selection.content &&
-										selection.content.steps.map((step, index) => {
-											return (
-												<div
-													style={{
-														// position: "absolute",
-														border: "1px solid black",
-													}}
-												>
-													<h3>{`Step # ${index + 1} ${step.stepTitle}`}</h3>
-													<div>{step.stepContent}</div>
-												</div>
-											);
-										})}
+									<Carousel
+										activeIndex={index}
+										onSelect={handleSelect}
+										interval={10000}
+									>
+										{selection.content &&
+											selection.content.steps.map((step, index) => {
+												return (
+													<Carousel.Item>
+														<div style={cardStyle}>
+															<h3>{`Step # ${index + 1} ${step.stepTitle}`}</h3>
+															<div>{step.stepContent}</div>
+														</div>
+													</Carousel.Item>
+												);
+											})}
+									</Carousel>
 								</Card.Text>
-								<div style={{ position: "relative" }}>
+								<div
+									style={
+										{
+											// position: "relative"
+										}
+									}
+								>
 									{selection.content &&
 										selection.content.steps.map((step, index) => {
 											return (
 												<span
 													style={{
-														borderLeft: "solid black 1px",
-														borderRight: "solid black 1px",
-														width: "50px",
-														height: "50px",
 														padding: "5px",
 													}}
 												>
-													<a href={`#${index}`}>{index + 1}</a>
+													<Button
+														variant="primary"
+														onClick={() => {
+															setIndex(index);
+														}}
+													>
+														{index + 1}
+													</Button>
 												</span>
 											);
 										})}
