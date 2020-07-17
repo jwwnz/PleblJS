@@ -13,6 +13,11 @@ const DWTPage = () => {
 	const handleHoursChange = (event) => {
 		setHours(event.target.value);
 	};
+
+	const handleReset = (event) => {
+		setPrice(0);
+		setHours(0);
+	};
 	return (
 		<>
 			<Container style={{ margin: "10px" }}>
@@ -41,17 +46,19 @@ const DWTPage = () => {
 						/>
 						<Form.Text className="text-muted">Be honest</Form.Text>
 					</Form.Group>
-					<Button variant="primary">Calculate</Button>
-					<Button variant="success" type="reset">
+					<Button variant="success" type="reset" onClick={handleReset}>
 						Reset
 					</Button>
 				</Form>
 
 				<hr />
-				<div>
-					{`You paid $${price}, for ${hours} hours, which means the hourly rate you are
-					paying is $${price && hours && price / hours} per hour`}
-				</div>
+				{price > 0 && hours > 0 && (
+					<div>
+						You paid ${price}, for {hours} hours, which means the rate you are
+						paying is&nbsp;
+						<strong>${price / hours} per hour</strong>
+					</div>
+				)}
 			</Container>
 		</>
 	);
