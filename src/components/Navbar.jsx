@@ -14,6 +14,9 @@ const PlebNavbar = () => (
 		<Nav className="mr-auto">
 			<Nav.Link href="/experiment">Experiment</Nav.Link>
 		</Nav>
+		<Nav className="mr-auto">
+			<Nav.Link href="/dont-waste-time">DWT calculator</Nav.Link>
+		</Nav>
 	</Navbar>
 );
 

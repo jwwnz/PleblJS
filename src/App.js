@@ -6,6 +6,7 @@ import HomePage from "./pages/Homepage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import ExperimentPage from "./pages/ExperimentPage";
+import DWTPage from "./pages/DWT";
 
 function App() {
 	return (
@@ -17,6 +18,9 @@ function App() {
 			<Switch>
 				<Route path="/experiment">
 					<ExperimentPage />
+				</Route>
+				<Route path="/dont-waste-time">
+					<DWTPage />
 				</Route>
 				<Route path="/">
 					<HomePage />
