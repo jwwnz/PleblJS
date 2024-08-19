@@ -1,0 +1,42 @@
+                      
+# azure-pipelines.yml
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+    - task: NuGetCommand@2
+      inputs:
+        command: restore
+        restoreSolution: '$(solution)'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: build
+        projects: '$(solution)'
+        configuration: '$(buildConfiguration)'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        path: '$(Build.ArtifactStagingDirectory)'
+
+- stage: Deploy
+  dependsOn: Build
+  jobs:
+  - job: Deploy
+    steps:
+    - task: AzureRMWebAppDeployment@4
+      inputs:
+        azureSubscription: '$(azureSubscription)'
+        appService: '$(appServiceName)'
+        package: '$(Build.ArtifactStagingDirectory)/$(buildConfiguration)/$(project).zip'
+                  
